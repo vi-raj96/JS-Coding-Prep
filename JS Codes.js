@@ -217,9 +217,24 @@ function swapNumb(a, b){
 
 8. Reverse a string
 
-let reverseString = (str) =>  {
+let reverseString = (str) =>  { //1st way
   return str.split('').reverse().join('')
 }
+
+const originalString = 'Hello, World!';
+const reversedString = reverseString(originalString);
+console.log(reversedString); // Output: "!dlroW ,olleH"
+
+
+let reverseString = (org) => { //2nd way
+    let res = "";
+    for(let i=0;i< org.length-1;i++){
+        res = res + org[org.length - i -1];
+    }
+    return res;
+}
+
+
 
 const originalString = 'Hello, World!';
 const reversedString = reverseString(originalString);
@@ -267,7 +282,7 @@ let findFirstNonRepeatingChar = (str) => {
 // Example usage:
 const inputString = 'aabbcdeeffg jjhhhdxc';
 const firstNonRepeatingChar = findFirstNonRepeatingChar(inputString);
-console.log(firstNonRepeatingChar); // Output: "d"
+console.log(firstNonRepeatingChar); // Output: "g"
 
 
 11. Print First repeating char
