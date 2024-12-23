@@ -536,7 +536,25 @@ console.log(countVowelsConsonants("hello world"));  // Output: { vowelCount: 3, 
 
 24. Array Flattening (Flatten Nested Arrays)
 
-function flattenArray(arr) {
+function flattenArray(arr) { //1st way
+    const stack = [...arr]; // Clone the array into a stack
+    const result = [];      // Initialize the result array
+
+    while (stack.length) {
+        const current = stack.pop(); // Take the last element from the stack
+        if (Array.isArray(current)) {
+            stack.push(...current);  // If it's an array, push its elements back into the stack
+        } else {
+            result.unshift(current); // If it's a value, add it to the result at the beginning
+        }
+    }
+
+    return result;
+}
+
+console.log(flattenArray([1, [2, [3, 4]], 5])); // Output: [1, 2, 3, 4, 5]
+
+function flattenArray(arr) { //2nd Way
     return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flattenArray(val)) : acc.concat(val), []);
 }
 
@@ -546,7 +564,21 @@ console.log(flattenArray([1, [2, [3, 4]], 5])); // Output: [1, 2, 3, 4, 5]
 
 25. Generate All Subsets of an Array
 
-function getSubsets(arr) {
+function getSubsets(arr) { //1st way
+    let subsets = [[]]; // Start with the empty set
+    for (let value of arr) {
+        let newSubsets = subsets.map(set => [...set, value]); // Add the current value to each existing subset
+        subsets = subsets.concat(newSubsets); // Combine existing subsets with the new ones
+    }
+    return subsets;
+}
+
+console.log(getSubsets([1, 2]));  // Output: [ [], [1], [2], [1, 2] ]
+console.log(getSubsets([1, 2, 3]));  // Output: [ [], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3] ]
+
+
+
+function getSubsets(arr) { //2nd way
     return arr.reduce((subsets, value) => subsets.concat(subsets.map(set => [value, ...set])), [[]]);
 }
 
